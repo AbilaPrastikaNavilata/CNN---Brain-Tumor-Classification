@@ -1,79 +1,84 @@
-🧠 Klasifikasi Gambar Tumor Otak Menggunakan CNN
-📍 Deteksi Tumor Otak dari Citra MRI Berbasis Convolutional Neural Network
+# 🧠 Brain Tumor Classification using CNN
 
-🎯 Tujuan Proyek
-Mengembangkan model Convolutional Neural Network (CNN) yang mampu mengklasifikasikan gambar MRI otak ke dalam dua kelas:
-✅ Tumor
-❌ Non-Tumor
+Sebuah proyek pembelajaran dan eksperimen untuk mendeteksi keberadaan tumor otak dari citra MRI menggunakan pendekatan **Convolutional Neural Network (CNN)**. Proyek ini dibangun dan diuji di **Google Colab** menggunakan **TensorFlow** dan **Python**.
 
-🧰 Teknologi yang Digunakan
-Teknologi	Fungsi
-Python	Bahasa pemrograman utama
-TensorFlow & Keras	Framework untuk membangun dan melatih model deep learning
-OpenCV & PIL	Pemrosesan gambar (grayscale, resize, normalisasi)
-Matplotlib	Visualisasi grafik dan gambar
-Google Colab	Lingkungan pemrograman cloud berbasis Jupyter
-KaggleHub	Akses dataset MRI tumor otak
+---
 
-📦 Dataset
-Dataset berasal dari Kaggle:
-🧩 brain-mri-images-for-brain-tumor-detection
+## 🔧 Teknologi yang Digunakan
 
-Kelas:
+| Teknologi | Deskripsi |
+|----------|-----------|
+| **TensorFlow & Keras** | Framework utama untuk membangun dan melatih model CNN |
+| **NumPy** | Manipulasi data numerik dan array |
+| **Matplotlib** | Visualisasi hasil prediksi dan performa model |
+| **PIL (Python Imaging Library)** | Membaca dan memproses gambar MRI |
+| **Google Colab** | Lingkungan eksekusi notebook Python berbasis cloud |
 
-yes → Gambar MRI dengan tumor (155 gambar)
+---
 
-no → Gambar MRI tanpa tumor (98 gambar)
+## 🧠 Arsitektur Model CNN
 
-Total: 253 gambar
-Ukuran gambar: 224 x 224 piksel
-Warna: RGB
+Model CNN yang digunakan memiliki struktur sebagai berikut:
 
-🔧 Preprocessing Data
-Resize semua gambar ke ukuran 224x224 piksel
+Input Image (224x224x3)
+│
+├─ Conv2D (32 filters, 3x3, ReLU)
+├─ MaxPooling2D (2x2)
+│
+├─ Flatten
+├─ Dense (256 units, ReLU)
+├─ Dropout (rate: 0.5)
+├─ Dense (1 unit, Sigmoid) → Output (0 = No Tumor, 1 = Tumor)
 
-Konversi ke RGB & normalisasi ke [0, 1]
+---
 
-Labeling:
 
-Tumor = 1
+Arsitektur ini cukup sederhana namun efektif untuk klasifikasi biner gambar medis.
 
-Non-tumor = 0
+---
 
-Split Data:
+## 🔄 Cara Kerja Sistem Deteksi
 
-80% data latih
+1. **Preprocessing Data**
+   - Semua gambar diubah ukurannya ke 224x224 piksel dan dikonversi ke format RGB
+   - Normalisasi data dilakukan agar nilai piksel berada dalam rentang [0,1]
+   - Dataset dibagi menjadi training, validation, dan testing
 
-20% data uji
+2. **Pelatihan Model**
+   - Model CNN dilatih selama 10 epoch
+   - Menggunakan binary crossentropy loss dan Adam optimizer
+   - Validasi dilakukan dengan data yang belum dilatih
 
-Batching: dengan batch_size = 32
+3. **Evaluasi**
+   - Mengukur akurasi model terhadap data testing
+   - Visualisasi akurasi dan loss selama pelatihan
 
-🧠 Arsitektur Model CNN
-python
-Copy
-Edit
-model = Sequential([
-    Conv2D(32, (3,3), activation='relu', input_shape=(224,224,3)),
-    MaxPooling2D((2,2)),
-    Flatten(),
-    Dense(256, activation='relu'),
-    Dropout(0.5),
-    Dense(1, activation='sigmoid')
-])
-Optimizer: Adam
+4. **Prediksi Eksternal**
+   - Gambar MRI dapat diunggah untuk diklasifikasikan secara real-time
+   - Sistem akan memberikan output: "Tumor detected" atau "No tumor detected"
 
-Loss: binary_crossentropy
+---
 
-Aktivasi Output: Sigmoid
+## 📊 Hasil Prediksi & Visualisasi
 
-📈 Hasil Pelatihan Model
-Dilatih selama 10 epoch dengan akurasi akhir:
+### 🎯 Akurasi Model
+Model mencapai akurasi sekitar **85%** pada data pengujian.
 
-Epoch	Train Accuracy	Val Accuracy
-1	58.89%	45.00%
-5	84.11%	95.00%
-10	100.00%	100.00%
+### 📈 Grafik Akurasi dan Loss
 
-🎯 Final Accuracy (Testing): 85.64%
-📉 Final Loss (Testing): 0.6342
+| Akurasi | Loss |
+|--------|------|
+| ![accuracy](https://github.com/username/repo-name/blob/main/assets/accuracy_plot.png) | ![loss](https://github.com/username/repo-name/blob/main/assets/loss_plot.png) |
 
+### 🖼️ Contoh Gambar MRI yang Diuji
+
+| Tumor | Tidak Ada Tumor |
+|-------|-----------------|
+| ![tumor](https://github.com/username/repo-name/blob/main/assets/sample_tumor.jpg) | ![normal](https://github.com/username/repo-name/blob/main/assets/sample_normal.jpg) |
+
+### 🔮 Prediksi Gambar Eksternal
+
+Gambar hasil upload pengguna akan dianalisis dan diklasifikasikan sebagai berikut:
+
+```python
+Prediction: Tumor detected ✅
