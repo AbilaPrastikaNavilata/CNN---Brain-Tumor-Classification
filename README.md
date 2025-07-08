@@ -21,14 +21,12 @@ Sebuah proyek pembelajaran dan eksperimen untuk mendeteksi keberadaan tumor otak
 Model CNN yang digunakan memiliki struktur sebagai berikut:
 
 Input Image (224x224x3)
-│
-├─ Conv2D (32 filters, 3x3, ReLU)
-├─ MaxPooling2D (2x2)
-│
-├─ Flatten
-├─ Dense (256 units, ReLU)
-├─ Dropout (rate: 0.5)
-├─ Dense (1 unit, Sigmoid) → Output (0 = No Tumor, 1 = Tumor)
+- Conv2D (32 filters, 3x3, ReLU)
+- MaxPooling2D (2x2)
+- Flatten
+-  Dense (256 units, ReLU)
+-  Dropout (rate: 0.5)
+-  Dense (1 unit, Sigmoid) → Output (0 = No Tumor, 1 = Tumor)
 
 ---
 
@@ -68,13 +66,13 @@ Model mencapai akurasi sekitar **85%** pada data pengujian.
 
 | Akurasi | Loss |
 |--------|------|
-| ![accuracy](https://github.com/username/repo-name/blob/main/assets/accuracy_plot.png) | ![loss](https://github.com/username/repo-name/blob/main/assets/loss_plot.png) |
+| ![accuracy](https://github.com/AbilaPrastikaNavilata/CNN---Brain-Tumor-Classification/blob/main/Hasil%20deteksi%201.png) | ![loss] |
 
 ### 🖼️ Contoh Gambar MRI yang Diuji
 
 | Tumor | Tidak Ada Tumor |
 |-------|-----------------|
-| ![tumor](https://github.com/username/repo-name/blob/main/assets/sample_tumor.jpg) | ![normal](https://github.com/username/repo-name/blob/main/assets/sample_normal.jpg) |
+| ![tumor](https://github.com/AbilaPrastikaNavilata/CNN---Brain-Tumor-Classification/blob/main/otak.png) | ![normal](https://github.com/AbilaPrastikaNavilata/CNN---Brain-Tumor-Classification/blob/main/otak%20normal.png) |
 
 ### 🔮 Prediksi Gambar Eksternal
 
